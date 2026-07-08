@@ -9,6 +9,8 @@ import (
 
 	"github.com/moatassem47/back-end-project/internal/api"
 	"github.com/moatassem47/back-end-project/internal/store"
+	"github.com/moatassem47/back-end-project/migrations"
+	_ "github.com/moatassem47/back-end-project/migrations"
 )
 
 type Application struct {
@@ -22,6 +24,11 @@ func NewApplication() (*Application, error) {
 	if err != nil {
 		fmt.Printf("error:%v", err)
 	}
+	err = store.MigrateFS(pgDB, migrations.FS, ".")
+	if err != nil {
+		panic(err)
+	}
+
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
 	workoutHandler := api.NewWorkoutHandler()
