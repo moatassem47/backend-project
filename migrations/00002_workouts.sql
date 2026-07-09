@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS workouts(
     title VARCHAR(255) NOT NULL,
     description TEXT,
     duration_minutes INTEGER NOT NULL,
-    calories_burned INTEGER NOT NULL,
+    calories_burnt INTEGER NOT NULL,
     created_at timestamp with TIME ZONE default  CURRENT_TIMESTAMP
 );
 -- +goose StatementEnd

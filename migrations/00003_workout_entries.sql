@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS workout_entries(
     weight DECIMAL(5,2),
     notes TEXT,
     order_index INTEGER NOT NULL,
-    calories_burned INTEGER NOT NULL,
+    calories_burnt INTEGER NOT NULL,
     created_at timestamp with TIME ZONE default  CURRENT_TIMESTAMP,
     CONSTRAINT valid_workout_entry CHECK(
         (reps_num is not null or duration_seconds is not null )and
