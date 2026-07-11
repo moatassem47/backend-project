@@ -72,6 +72,7 @@ func (wh *WorkoutHandler) HandleUpdateWorkoutByID(w http.ResponseWriter, r *http
 	existingWorkout, err := wh.workoutStore.GetWorkoutByID(workoutId)
 	if err != nil {
 		http.Error(w, "failed to fetch workout", http.StatusInternalServerError)
+		return
 	}
 	if existingWorkout == nil {
 		http.NotFound(w, r)

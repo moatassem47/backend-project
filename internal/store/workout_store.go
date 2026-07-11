@@ -87,7 +87,7 @@ func (pg *PostgresWorkoutStore) CreateWorkout(workout *Workout) (*Workout, error
 func (pg *PostgresWorkoutStore) GetWorkoutByID(id int64) (*Workout, error) {
 	workout := &Workout{}
 	query := `
-  SELECT id, title, description, duration_minutes, calories_burnt
+  SELECT id, title, description, duration_minutes, calories_burned
   FROM workouts
   WHERE id = $1
   `
@@ -99,7 +99,7 @@ func (pg *PostgresWorkoutStore) GetWorkoutByID(id int64) (*Workout, error) {
 		return nil, err
 	}
 	entryQuery := `
-  SELECT id, exercise_name, sets, reps, duration_seconds, weight, notes, order_index
+  SELECT id, exercise_name, sets_num, reps_num, duration_seconds, weight, notes, order_index
   FROM workout_entries
   WHERE workout_id = $1
   ORDER BY order_index
@@ -138,7 +138,7 @@ func (pg *PostgresWorkoutStore) UpdateWorkout(workout *Workout) error {
 
 	query := `
   UPDATE workouts
-  SET title = $1, description = $2, duration_minutes = $3, calories_burnt = $4
+  SET title = $1, description = $2, duration_minutes = $3, calories_burned = $4
   WHERE id = $5
   `
 	result, err := tx.Exec(query, workout.Title, workout.Description, workout.DurationMinutes, workout.CaloriesBurnt, workout.ID)
@@ -158,7 +158,7 @@ func (pg *PostgresWorkoutStore) UpdateWorkout(workout *Workout) error {
 	}
 	for _, Entry := range workout.Entries {
 		query := `
-    INSERT INTO workout_entries (workout_id, exercise_name, sets, reps, duration_seconds, weight, notes, order_index)
+    INSERT INTO workout_entries (workout_id, exercise_name, sets_num, reps_num, duration_seconds, weight, notes, order_index)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     `
 		_, err := tx.Exec(query, workout.ID,
