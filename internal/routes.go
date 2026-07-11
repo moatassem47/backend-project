@@ -9,5 +9,6 @@ r:= chi.NewRouter()
 r.Get("/health",app.HealthCheck)
 r.Get("/workouts/{id}",app.WorkoutHandler.HandleGetWorkoutById)
 r.Post("/workouts",app.WorkoutHandler.HandleCreateWorkout)
+r.Put("/workouts/{id}",app.WorkoutHandler.HandleUpdateWorkoutByID)
 return r
 }
