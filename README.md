@@ -1,2 +1,2 @@
 # backend-project
-Backend project in go 
+CRUD app to post workouts in GO
